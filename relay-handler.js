@@ -1,5 +1,7 @@
 'use strict';
 
+var console = require('console');
+
 var PeersCollection = require('./peers-collection.js');
 
 module.exports = RelayHandler;
@@ -67,7 +69,7 @@ function handleCallRequest(frame) {
     var info = new RelayInfo(inId, frame.sourceConnection);
     destConn.addPendingOutReq(outId, info, 1000);
 
-    var buf = frame.frameBuffer.slice(frame.offset, frame.length)
+    var buf = frame.frameBuffer.slice(frame.offset, frame.length);
     destConn.writeFrame(buf);
 };
 

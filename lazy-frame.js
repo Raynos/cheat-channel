@@ -2,6 +2,9 @@
 
 /* @flow */
 
+var console = require('console');
+
+/*eslint no-unused-vars: 0*/
 var ID_OFFSET = 4;
 var TYPE_OFFSET = 2;
 

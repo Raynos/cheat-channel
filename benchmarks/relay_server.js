@@ -13,6 +13,7 @@
 
 var assert = require('assert');
 var process = require('process');
+var console = require('console');
 var setTimeout = require('timers').setTimeout;
 
 var Channel = require('./channel.js');
@@ -47,6 +48,7 @@ function main(argv) {
         var rate = channel.handler.responseCount;
         channel.handler.responseCount = 0;
 
+        /*eslint no-console: 0*/
         console.log('RPS[node_relay]:', rate);
 
         setTimeout(printRPS, 1000);

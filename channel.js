@@ -167,6 +167,7 @@ function close(cb) {
     self.peers.close();
 
     if (cb) {
+        /*eslint callback-return: 0*/
         cb(null);
     }
 };

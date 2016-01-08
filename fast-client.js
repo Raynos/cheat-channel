@@ -123,7 +123,7 @@ EndpointSender.prototype.send = function send(options, onResponse) {
 function toFlatArray(object) {
     var flatList = [];
 
-    /*eslint guard-for-in: 0*/
+    /*eslint guard-for-in: 0, no-restricted-syntax: 0*/
     for (var key in object) {
         flatList.push(key);
         flatList.push(object[key]);
