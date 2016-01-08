@@ -10,28 +10,6 @@
 
 minimal high perf implementation of tchannel
 
-## Example
-
-```js
-var cheatChannel = require("cheat-channel");
-
-// TODO. Show example
-```
-
-## Docs
-
-### `var someValue = cheatChannel(/*arguments*/)`
-
-<!--
-  This is a jsig notation of your interface.
-  https://github.com/Raynos/jsig
--->
-```ocaml
-cheat-channel := (arg: Any) => void
-```
-
-// TODO. State what the module does.
-
 ## Installation
 
 `npm install cheat-channel`
