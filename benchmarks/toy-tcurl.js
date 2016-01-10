@@ -2,13 +2,13 @@
 
 /* @flow */
 
+var process = global.process;
 var parseArgs = require('minimist');
-var process = require('process');
 var assert = require('assert');
 var console = require('console');
 
 /*eslint no-console: 0*/
-var Channel = require('./channel.js');
+var Channel = require('../channel.js');
 
 function main(opts) {
     assert(opts.p || opts.peer, 'peer required');

@@ -1,7 +1,7 @@
 /* @flow */
 // vim: set ft=Typescript:
 
-var Channel = require('./channel.js');
+var Channel = require('../channel.js');
 
 declare export class BenchServer {
     port: number;

@@ -2,9 +2,9 @@
 
 /* @flow */
 
+var process = global.process;
 var Buffer = require('buffer').Buffer;
 var SlowBuffer = require('buffer').SlowBuffer;
-var process = require('process');
 var console = require('console');
 
 var FrameParser = require('./parser.js');

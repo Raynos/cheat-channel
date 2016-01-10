@@ -2,13 +2,13 @@
 
 /* @flow */
 
-var process = require('process');
+var process = global.process;
 process.title = 'nodejs-benchmarks-cheat_bench_server';
 
 var parseArgs = require('minimist');
 var assert = require('assert');
 
-var Channel = require('./channel.js');
+var Channel = require('../channel.js');
 
 var SERVER_HOST = '127.0.0.1';
 

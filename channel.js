@@ -2,7 +2,7 @@
 
 /* @flow */
 
-var process = require('process');
+var process = global.process;
 var TCP_WRAP = process.binding('tcp_wrap').TCP;
 var console = require('console');
 

@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/.*
+
+[include]
+
+[libs]
+flow/buffer.js.flow
+flow/console.js.flow
+flow/net.js.flow
+flow/minimist.js.flow
+
+[options]
+module.system=node

@@ -1,0 +1,5 @@
+declare module "minimist" {
+    declare var exports: {
+        (argv: Array<string>): any;
+    }
+}

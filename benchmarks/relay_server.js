@@ -16,8 +16,8 @@ var process = require('process');
 var console = require('console');
 var setTimeout = require('timers').setTimeout;
 
-var Channel = require('./channel.js');
-var RelayHandler = require('./relay-handler.js');
+var Channel = require('../channel.js');
+var RelayHandler = require('../relay-handler.js');
 
 if (require.main === module) {
     var args = process.argv.slice(2);
