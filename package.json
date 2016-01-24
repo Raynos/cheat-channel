@@ -16,11 +16,11 @@
       "name": "Raynos"
     }
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "1.8.0",
     "eslint-config-perf-standard": "2.0.0",
+    "flow-bin": "^0.20.1",
     "istanbul": "^0.3.5",
     "opn": "^1.0.1",
     "tape": "^3.4.0"
@@ -43,8 +43,7 @@
   "engine": {
     "node": ">= 0.8.x"
   },
-  "pre-commit": [
-  ],
+  "pre-commit": [],
   "pre-commit.silent": true,
   "ngen-version": "5.1.0"
 }
