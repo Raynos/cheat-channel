@@ -43,6 +43,7 @@ function LazyFrame(sourceConnection, frameBuffer, offset, length) {
     self.initReqHeaders = null;
 
     self.reqServiceName = null;
+    self.resCode = null;
     self.tHeadersCount = null;
     self.checksumType = null;
     self.arg1Length = null;
@@ -110,6 +111,20 @@ function markAsCallResponse() {
 function readString(buffer, offset, end) {
     return buffer.utf8Slice(offset, end);
 }
+
+LazyFrame.prototype.readResCode =
+function readResCode() {
+    var self/*:LazyFrame*/ = this;
+
+    if (self.resCode !== null) {
+        return self.resCode;
+    }
+
+    self.resCode = self.frameBuffer.readUInt8(
+        self.offset + CRES_CODE_OFFSET, true
+    );
+    return self.resCode;
+};
 
 LazyFrame.prototype.readReqServiceName =
 function readReqServiceName() {

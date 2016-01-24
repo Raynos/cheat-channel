@@ -16,6 +16,7 @@ declare export class LazyFrame {
     initReqHeaders: Array<string> | null;
 
     reqServiceName: string | null;
+    resCode: number | null;
     tHeadersCount: number | null;
     checksumType: number | null;
     arg1Length: number | null;
@@ -43,6 +44,7 @@ declare export class LazyFrame {
     readFrameType: () => number;
     writeId: (newId: number) => number;
     markAsCallResponse: () => void;
+    readResCode: () => number;
     readReqServiceName: () => string;
     readArg1str: () => string;
     readArg1: () => Buffer;

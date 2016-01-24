@@ -17,6 +17,8 @@ declare class buffer$Buffer {
         targetStart?: number, targetEnd?: number
     ): void;
 
+    fill(byte: string | number): void;
+
     static isBuffer(buf: buffer$Buffer): boolean;
 }
 
