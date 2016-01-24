@@ -1,0 +1,20 @@
+declare class collectParallel$Result<T> {
+    err: Error | null,
+    value: T | null
+}
+
+declare module "collect-parallel/array" {
+    declare var exports: {
+        <T, S>(
+            tasks: Array<T>,
+            iterator: (
+                item: T,
+                index: number,
+                cb: (err: Error, value: S) => void
+            ) => void,
+            onFinish: (
+                err: null, values: Array<collectParallel$Result<S>>
+            ) => void
+        ): void;
+    }
+}

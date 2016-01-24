@@ -5,6 +5,7 @@
 
 [libs]
 flow/buffer.js.flow
+flow/collect-parallel.js.flow
 flow/console.js.flow
 flow/net.js.flow
 flow/minimist.js.flow
