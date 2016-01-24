@@ -2,13 +2,23 @@
 // vim: set ft=Typescript:
 
 var Channel = require('../channel.js');
+var LazyFrame = require('../lazy-frame.js');
+var OutResponse = require('../out-response.js');
 
 declare export class BenchServer {
     port: number;
     channel: Channel;
-    keys: { [key: string]: Buffer };
+    benchService: BenchService;
 
     constructor(port: number): void;
     registerEndpoints: () => void;
     listen: () => void;
+}
+
+declare export class BenchService {
+    keys: { [key: string]: Buffer };
+
+    handleGet: (frame: LazyFrame, res: OutResponse) => void;
+    handleSet: (frame: LazyFrame, res: OutResponse) => void;
+    handlePing: (frame: LazyFrame, res: OutResponse) => void;
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 /*eslint max-params: 0, max-statements: 0 */
-var process = require('process');
+var process = global.process;
 var Buffer = require('buffer').Buffer;
 
 module.exports = {

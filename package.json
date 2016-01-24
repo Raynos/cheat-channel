@@ -16,7 +16,9 @@
       "name": "Raynos"
     }
   ],
-  "dependencies": {},
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
   "devDependencies": {
     "eslint": "1.8.0",
     "eslint-config-perf-standard": "2.0.0",

@@ -33,11 +33,11 @@ function register(serviceName, endpoint, fn) {
     }
 
     self.services[serviceName][endpoint] =
-        new EndpointDefinition(fn, null, null);
+        new EndpointDefinition(fn, null, null, null);
 };
 
 FrameHandler.prototype.registerRaw =
-function registerRaw(serviceName, endpoint, fn) {
+function registerRaw(serviceName, endpoint, fn, ctx) {
     var self/*:FrameHandler*/ = this;
 
     if (!self.services[serviceName]) {
@@ -51,14 +51,30 @@ function registerRaw(serviceName, endpoint, fn) {
         cacheBuf, 0, headers
     );
 
+    ctx = ctx || null;
     self.services[serviceName][endpoint] =
-        new EndpointDefinition(fn, cacheBuf, csumstart);
+        new EndpointDefinition(fn, ctx, cacheBuf, csumstart);
 };
 
-function EndpointDefinition(fn, cacheBuf, csumstart) {
+FrameHandler.prototype.registerRawService =
+function registerRawService(serviceName, service, methods) {
+    var self/*:FrameHandler*/ = this;
+
+    for (var i = 0; i < methods.length; i++) {
+        var endpointName = methods[i];
+        var methodName = 'handle' + endpointName[0].toUpperCase() +
+            endpointName.slice(1, endpointName.length);
+
+        var fn = service[methodName];
+        self.registerRaw(serviceName, endpointName, fn, service);
+    }
+};
+
+function EndpointDefinition(fn, ctx, cacheBuf, csumstart) {
     var self/*:EndpointDefinition*/ = this;
 
     self.fn = fn;
+    self.ctx = ctx;
     self.cacheBuf = cacheBuf;
     self.csumstart = csumstart;
 }
@@ -123,7 +139,7 @@ function handleCallRequest(frame) {
     var resp = new OutResponse(
         reqFrameId, conn, defn.cacheBuf, defn.csumstart
     );
-    defn.fn(frame, resp);
+    defn.fn.call(defn.ctx, frame, resp);
     // LazyFrame.free(frame);
 };
 

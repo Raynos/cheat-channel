@@ -16,7 +16,11 @@ declare export class FrameHandler {
         serviceName: string, endpoint: string, fn: IHandlerFn
     ) => void;
     registerRaw: (
-        serviceName: string, endpoint: string, fn: IHandlerFn
+        serviceName: string, endpoint: string,
+        fn: IHandlerFn, ctx?: Object
+    ) => void;
+    registerRawService: (
+        serviceName: string, service: Object, methods: Array<string>
     ) => void;
     handleFrame: (frame: LazyFrame) => void;
     handleInitRequest: (frame: LazyFrame) => void;
@@ -30,8 +34,12 @@ declare export class EndpointDefinition {
     cacheBuf: Buffer | null;
     csumstart: number | null;
     fn: IHandlerFn;
+    ctx: Object | null;
 
     constructor(
-        fn: IHandlerFn, cacheBuf: Buffer | null, csumstart: number | null
+        fn: IHandlerFn,
+        ctx: Object | null,
+        cacheBuf: Buffer | null,
+        csumstart: number | null
     ): void;
 }

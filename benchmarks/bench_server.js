@@ -15,6 +15,7 @@ var SERVER_HOST = '127.0.0.1';
 /*::
 import * as type from './bench_server.h.js';
 declare var BenchServer : Class<type.BenchServer>
+declare var BenchService : Class<type.BenchService>
 */
 
 function BenchServer(port) {
@@ -25,10 +26,9 @@ function BenchServer(port) {
     // TODO: trace propagation
     // TODO: timeouts
     self.channel = new Channel();
+    self.benchService = new BenchService();
 
     // TODO: optional trace reporter
-
-    self.keys = {};
     self.registerEndpoints();
 }
 
@@ -36,33 +36,9 @@ BenchServer.prototype.registerEndpoints =
 function registerEndpoints() {
     var self/*:BenchServer*/ = this;
 
-    self.channel.endpoints.registerRaw('benchmark', 'ping', onPing);
-    self.channel.endpoints.registerRaw('benchmark', 'set', onSet);
-    self.channel.endpoints.registerRaw('benchmark', 'get', onGet);
-
-    function onGet(frame, res) {
-        var key = frame.readArg2str();
-
-        if (self.keys[key] !== undefined) {
-            var val = self.keys[key];
-            res.sendOk(val.length.toString(10), val);
-        } else {
-            res.sendNotOk('key not found', key);
-        }
-    }
-
-    function onSet(frame, res) {
-        var key = frame.readArg2str();
-        var val = frame.readArg3();
-
-        self.keys[key] = val;
-
-        res.sendOk('ok', 'really ok');
-    }
-
-    function onPing(frame, res) {
-        res.sendOk('pong', null);
-    }
+    self.channel.endpoints.registerRawService(
+        'benchmark', self.benchService, ['ping', 'set', 'get']
+    );
 };
 
 BenchServer.prototype.listen =
@@ -70,6 +46,42 @@ function listen() {
     var self/*:BenchServer*/ = this;
 
     self.channel.listen(self.port, SERVER_HOST);
+};
+
+function BenchService() {
+    var self/*:BenchService*/ = this;
+
+    self.keys = {};
+}
+
+BenchService.prototype.handleGet =
+function handleGet(frame, res) {
+    var self/*:BenchService*/ = this;
+    var key = frame.readArg2str();
+
+    if (self.keys[key] !== undefined) {
+        var val = self.keys[key];
+        res.sendOk(val.length.toString(10), val);
+    } else {
+        res.sendNotOk('key not found', key);
+    }
+};
+
+BenchService.prototype.handleSet =
+function handleSet(frame, res) {
+    var self/*:BenchService*/ = this;
+
+    var key = frame.readArg2str();
+    var val = frame.readArg3();
+
+    self.keys[key] = val;
+
+    res.sendOk('ok', 'really ok');
+};
+
+BenchService.prototype.handlePing =
+function handlePing(frame, res) {
+    res.sendOk('pong', null);
 };
 
 function main(opts) {
