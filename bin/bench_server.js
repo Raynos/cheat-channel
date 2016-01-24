@@ -12,6 +12,8 @@ var Channel = require('../channel.js');
 
 var SERVER_HOST = '127.0.0.1';
 
+module.exports = BenchServer;
+
 /*::
 import * as type from './bench_server.h.js';
 declare var BenchServer : Class<type.BenchServer>
