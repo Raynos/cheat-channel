@@ -71,6 +71,7 @@ function Channel() {
 
     self.server = new TCP_WRAP();
     self.handler = new FrameHandler();
+    self.endpoints = self.handler;
     self.peers = new PeersCollection(self);
     self.sender = new TChannelSender(self);
 

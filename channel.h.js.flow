@@ -25,9 +25,14 @@ type SendOptions = {
 };
 type IOnResponse = (err?: Error, resp: LazyFrame) => void
 
+type IFrameHandler = {
+    handleFrame: (frame: LazyFrame) => void;
+}
+
 declare export class Channel {
     server: TCP_WRAP;
-    handler: FrameHandler;
+    handler: IFrameHandler;
+    endpoints: FrameHandler;
     peers: PeersCollection;
     sender: TChannelSender;
 
