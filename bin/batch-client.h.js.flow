@@ -1,0 +1,23 @@
+/* @flow */
+
+var Channel = require('../channel.js');
+
+declare export class BatchClient {
+    constructor(hosts: Array<string>, options: Object): void;
+
+    channel: Channel;
+    hosts: Array<string>;
+    totalTime: number;
+    queryPerSecond: number;
+    bodySize: number;
+    command: string;
+}
+declare export class BatchClientLoop {
+
+}
+declare export class BatchClientResults {
+
+}
+declare export class BatchClientRequestResult {
+
+}
