@@ -1,0 +1,3 @@
+declare module "timers" {
+    declare function setTimeout(fn: () => void, timer: number): void;
+}

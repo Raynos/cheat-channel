@@ -8,6 +8,7 @@ flow/buffer.js.flow
 flow/console.js.flow
 flow/net.js.flow
 flow/minimist.js.flow
+flow/timers.js.flow
 
 [options]
 module.system=node
