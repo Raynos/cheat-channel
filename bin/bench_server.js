@@ -34,21 +34,21 @@ function BenchServer(port) {
     self.registerEndpoints();
 }
 
-BenchServer.prototype.registerEndpoints =
+BenchServer.prototype.registerEndpoints = registerEndpoints;
 function registerEndpoints() {
     var self/*:BenchServer*/ = this;
 
     self.channel.endpoints.registerRawService(
         'benchmark', self.benchService, ['ping', 'set', 'get']
     );
-};
+}
 
-BenchServer.prototype.listen =
+BenchServer.prototype.listen = listen;
 function listen() {
     var self/*:BenchServer*/ = this;
 
     self.channel.listen(self.port, SERVER_HOST);
-};
+}
 
 function BenchService() {
     var self/*:BenchService*/ = this;
@@ -56,7 +56,7 @@ function BenchService() {
     self.keys = {};
 }
 
-BenchService.prototype.handleGet =
+BenchService.prototype.handleGet = handleGet;
 function handleGet(frame, res) {
     var self/*:BenchService*/ = this;
     var key = frame.readArg2str();
@@ -67,9 +67,9 @@ function handleGet(frame, res) {
     } else {
         res.sendNotOk('key not found', key);
     }
-};
+}
 
-BenchService.prototype.handleSet =
+BenchService.prototype.handleSet = handleSet;
 function handleSet(frame, res) {
     var self/*:BenchService*/ = this;
 
@@ -79,12 +79,12 @@ function handleSet(frame, res) {
     self.keys[key] = val;
 
     res.sendOk('ok', 'really ok');
-};
+}
 
-BenchService.prototype.handlePing =
+BenchService.prototype.handlePing = handlePing;
 function handlePing(frame, res) {
     res.sendOk('pong', null);
-};
+}
 
 function main(opts) {
     assert(opts.port, 'port needed');
