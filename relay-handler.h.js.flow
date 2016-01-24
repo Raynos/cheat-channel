@@ -1,0 +1,29 @@
+/* @flow */
+// vim: set ft=Typescript:
+
+var Channel = require('./channel.js');
+var LazyFrame = require('./lazy-frame.js');
+var Connection = require('./connection.js');
+var PeersCollection = require('./peers-collection.js');
+
+declare export class RelayHandler {
+    constructor(channel: Channel, destinations: Array<string>): void;
+
+    channel: Channel;
+    responseCount: number;
+    peers: PeersCollection;
+
+    handleFrame: (frame: LazyFrame) => void;
+    handleInitRequest: (frame: LazyFrame) => void;
+    handleInitResponse: (frame: LazyFrame) => void;
+    handleCallRequest: (frame: LazyFrame) => void;
+    handleCallResponse: (frame: LazyFrame) => void;
+    handleUnknownFrame: (frame: LazyFrame) => void;
+}
+
+declare export class RelayInfo {
+    constructor(inId: number, conn: Connection): void;
+
+    inId: number;
+    connection: Connection;
+}

@@ -1,14 +1,21 @@
 'use strict';
 
+/* @flow */
+
 var console = require('console');
 
 var PeersCollection = require('./peers-collection.js');
 
+/*::
+import * as type from './relay-handler.h.js';
+declare var RelayHandler : Class<type.RelayHandler>
+declare var RelayInfo : Class<type.RelayInfo>
+*/
 module.exports = RelayHandler;
 
 function RelayHandler(channel, destinations) {
     if (!(this instanceof RelayHandler)) {
-        return new RelayHandler(channel);
+        return new RelayHandler(channel, destinations);
     }
 
     this.channel = channel;
@@ -22,7 +29,7 @@ function RelayHandler(channel, destinations) {
 
 RelayHandler.prototype.handleFrame =
 function handleFrame(frame) {
-    var self = this;
+    var self/*:RelayHandler*/ = this;
 
     var frameType = frame.readFrameType();
 
@@ -58,7 +65,7 @@ function handleInitResponse(frame) {
 
 RelayHandler.prototype.handleCallRequest =
 function handleCallRequest(frame) {
-    var self = this;
+    var self/*:RelayHandler*/ = this;
 
     var inId = frame.readId();
     var destConn = self.peers.roundRobinConn();
@@ -75,7 +82,7 @@ function handleCallRequest(frame) {
 
 RelayHandler.prototype.handleCallResponse =
 function handleCallResponse(frame) {
-    var self = this;
+    var self/*:RelayHandler*/ = this;
 
     // VERY IMPORTANT LOL
     frame.markAsCallResponse();

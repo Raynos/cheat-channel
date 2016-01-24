@@ -1,5 +1,7 @@
 'use strict';
 
+/* @flow */
+
 /* Semantics:
 
     Takes frames in; Mutates the id; forwards.
@@ -12,7 +14,7 @@
 */
 
 var assert = require('assert');
-var process = require('process');
+var process = global.process;
 var console = require('console');
 var setTimeout = require('timers').setTimeout;
 
@@ -38,15 +40,17 @@ function main(argv) {
     var channel = new Channel();
     channel.listen(port, host);
 
-    channel.handler = new RelayHandler(channel, relays);
+    var handler = new RelayHandler(channel, relays);
+    channel.handler = handler;
 
     if (printRPSEnabled) {
         setTimeout(printRPS, 1000);
     }
 
     function printRPS() {
-        var rate = channel.handler.responseCount;
-        channel.handler.responseCount = 0;
+        var rate = handler.responseCount;
+        /*:: (handler.responseCount : number) */
+        handler.responseCount = 0;
 
         /*eslint no-console: 0*/
         console.log('RPS[node_relay]:', rate);
